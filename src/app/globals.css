@@ -21,3 +21,24 @@ body {
   font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
 }
+
+.activity::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+}
+
+/* Track */
+.activity::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+.activity::-webkit-scrollbar-thumb {
+  background: #bdbbbb; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.activity::-webkit-scrollbar-thumb:hover {
+  background: #adacac; 
+}
