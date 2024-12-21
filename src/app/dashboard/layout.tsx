@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const [sidebar, setSidebar] = useState<boolean>(false);
   return (
-    <main className="flex relative flex-row w-full h-screen mb-[1000px]">
+    <main className="flex relative flex-row w-full h-screen">
       <Sidebar />
       <Sidenav sidebar={sidebar} setSidebar={setSidebar} />
       <section className="flex flex-col w-full">

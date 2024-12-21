@@ -12,12 +12,12 @@ export interface HeaderProps {
 
 export default function Header({ setSidebar }: HeaderProps) {
   return (
-    <header className="p-5 absolute top-0 left-0 right-0 bg-white flex flex-col gap-y-2 border-b border-b-[#E6EFF5]">
-      <nav className="flex flex-row justify-between items-center">
+    <header className="p-5 fixed top-0 left-0 right-0 bg-white flex flex-col z-10 gap-y-2 border-b border-b-[#E6EFF5] justify-center items-center">
+      <nav className="flex flex-row justify-between items-center container">
         <button onClick={()=>setSidebar(true)} className="md:hidden text-xl">
           <GiHamburgerMenu color="#343C6A" />
         </button>
-        <h1 className="text-[#343C6A] font-semibold text-lg">Overview</h1>
+        <h1 className="text-[#343C6A] font-semibold text-lg md:text-white lg:text-[#343C6A] lg:ml-[240px] lg:text-2xl">Overview</h1>
         <div className="hidden flex-row gap-x-4 items-center sm:flex md:gap-x-7">
           <div className="relative">
             <input
@@ -53,7 +53,7 @@ export default function Header({ setSidebar }: HeaderProps) {
           alt="logo"
         />
       </nav>
-      <div className="relative sm:hidden">
+      <div className="relative w-full sm:hidden">
         <input
           type="text"
           placeholder="Search for something"

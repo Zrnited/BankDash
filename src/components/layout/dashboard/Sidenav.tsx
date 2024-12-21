@@ -16,7 +16,7 @@ export default function Sidenav({ setSidebar, sidebar }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className={sidebar ? "bg-white w-full border-r border-r-[#E6EFF5] fixed left-0 h-full py-7 pr-3 flex flex-col z-10 transition-all ease-in-out delay-100 md:hidden" : "bg-white w-full border-r border-r-[#E6EFF5] fixed -left-full h-full py-7 pr-3 flex flex-col z-10 transition-all ease-in-out delay-100 md:hidden"}>
+    <aside className={sidebar ? "bg-white w-full border-r border-r-[#E6EFF5] fixed left-0 h-full py-7 pr-3 flex flex-col z-20 transition-all ease-in-out delay-100 md:hidden" : "bg-white w-full border-r border-r-[#E6EFF5] fixed -left-full h-full py-7 pr-3 flex flex-col z-20 transition-all ease-in-out delay-100 md:hidden"}>
       <div onClick={()=>setSidebar(false)} className="place-self-end cursor-pointer font-bold">
         <AiOutlineClose color="#FE5C73" size={23} />
       </div>
