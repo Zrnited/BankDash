@@ -30,6 +30,7 @@ export default function Home() {
   const [succNotify, setSuccNotify] = useState<string>();
   const [errNotify, setErrNotify] = useState<string>();
   const [isUserAuth, setIsUserAuth] = useState<boolean>(false);
+  const [togglePass, setTogglePass] = useState<boolean>(false);
 
   function handleChange(e: any) {
     const { name, type, value, checked } = e.target;
@@ -112,16 +113,17 @@ export default function Home() {
           />
         </div>
         {/* password */}
-        <div className="flex flex-col gap-y-2 w-full">
+        <div className="flex flex-col gap-y-2 w-full relative">
           <label className="text-[#343C6A] font-semibold">Password:</label>
           <input
             className="h-[45px] w-full border border-[#343C6A] px-3 rounded-md focus:outline-none"
             required
-            placeholder="Enter your email address"
-            type="password"
+            placeholder="Enter your password"
+            type={togglePass ? "text" : "password"}
             onChange={handleChange}
             name="password"
           />
+          <p onClick={()=>setTogglePass(!togglePass)} className="text-[#343C6A] text-sm font-semibold absolute right-3 top-11 cursor-pointer">{togglePass ? "hide" : "show"}</p>
         </div>
         {/* checkbox */}
         <div className="flex flex-row gap-y-2 w-full items-center gap-x-2">
