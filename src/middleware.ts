@@ -31,10 +31,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (!user && pathname === "/redirectDashboard") {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
   if (user && pathname === "/redirectDashboard") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }

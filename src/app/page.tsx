@@ -3,7 +3,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { setCookie } from "./authenticateUser/handleCookies";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "@/assets/images/bankdashlogo.png";
 
@@ -14,8 +13,6 @@ interface LoginForm {
 }
 
 export default function Home() {
-
-  const router = useRouter();
   const authUser = {
     userName: "user123",
     password: "pass123xJi5"
@@ -84,7 +81,7 @@ export default function Home() {
   useEffect(()=>{
     const interval = setInterval(()=>{
       if(isUserAuth){
-        router.push('/redirectDashboard');
+        window.location.href="/dashboard";
       }
     }, 2500)
     return () => clearInterval(interval);
