@@ -4,8 +4,42 @@ import Cards from "@/components/ui/cards";
 import { CardsInfo } from "@/utils/DashboardDatas";
 import MyExpenses from "@/components/graphs/transactions/myExpenses";
 import Heading from "@/components/ui/sectionHeadings";
+import Table from "@/tables/TransactionsTable";
+import { Transactions } from "@/utils/TransactionDatas";
 
 export default function TransactionsPage() {
+
+  const tableHead = [
+    {
+      name: "Description",
+      className: "text-left"
+    },
+    {
+      name: "Transactions ID",
+      className: "hidden lg:table-cell"
+    },
+    {
+      name: "Type",
+      className: "hidden lg:table-cell"
+    },
+    {
+      name: "Card",
+      className: "hidden lg:table-cell"
+    },
+    {
+      name: "Date",
+      className: "hidden lg:table-cell"
+    },
+    {
+      name: "Amount",
+      className: "text-left"
+    },
+    {
+      name: "Receipt",
+      className: "hidden lg:table-cell"
+    },
+  ]
+
   return (
     <main className="w-full">
       <section className="flex flex-col gap-y-5 lg:flex-row lg:gap-x-3">
@@ -27,7 +61,7 @@ export default function TransactionsPage() {
           </div>
         </div>
       </section>
-      <section className="mt-8 pb-[1000px]">
+      <section className="mt-8">
         <Heading text="recent transactions" />
         <div className="flex flex-row py-3 text-sm text-[#718EBF] font-medium max-w-[500px]">
           <div className="flex flex-col gap-y-1 w-full">
@@ -44,7 +78,7 @@ export default function TransactionsPage() {
           </div>
         </div>
         <div className="bg-white rounded-lg p-3">
-          
+          <Table tableHead={tableHead} tableBody={Transactions} />
         </div>
       </section>
     </main>
