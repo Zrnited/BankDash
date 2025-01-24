@@ -43,7 +43,7 @@ export default function Table({ tableHead, tableBody }: TableProps) {
           {tableHead?.map((item, index) => {
             return (
               <th
-                className={`${item?.className} text-sm text-[#718EBF] border-b-[#E4E4E4] border-b font-medium`}
+                className={`${item?.className} text-sm text-[#718EBF] border-b-[#E4E4E4] border-b font-medium h-[45px]`}
                 key={index}
                 style={{ fontWeight: "normal" }}
               >
@@ -109,9 +109,9 @@ export default function Table({ tableHead, tableBody }: TableProps) {
               )}
               <td
                 className="hidden lg:table-cell"
-                style={{ fontWeight: "normal" }}
+                style={{ fontWeight: "normal", color: "#123288" }}
               >
-                <button className="p-3 rounded-full border-2 border-[#123288] text-[#123288]">Download</button>
+                <button className="p-3 rounded-full border-2 border-[#123288]">Download</button>
               </td>
             </tr>
           );

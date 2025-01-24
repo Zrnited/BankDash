@@ -5,9 +5,36 @@ import { CardsInfo } from "@/utils/DashboardDatas";
 import MyExpenses from "@/components/graphs/transactions/myExpenses";
 import Heading from "@/components/ui/sectionHeadings";
 import Table from "@/tables/TransactionsTable";
-import { Transactions } from "@/utils/TransactionDatas";
+import { Transaction, Transactions } from "@/utils/TransactionDatas";
+import { useState } from "react";
 
 export default function TransactionsPage() {
+
+  const [tdata, setTData] = useState<Transaction[]>(Transactions);
+  const [dataState, setDataState] = useState<string>("AllTransactions");
+
+  function filterIncome (){
+    const incomeArray = Transactions.filter((prevState)=>{
+      return prevState.mode !== "expense";
+    })
+    // console.log(incomeArray);
+    setTData(incomeArray);
+    setDataState("income");
+  }
+
+  function filterExpense(){
+    const expenseArray = Transactions.filter((prevState)=>{
+      return prevState.mode !== "income";
+    })
+    // console.log(expenseArray);
+    setTData(expenseArray);
+    setDataState("expense");
+  }
+
+  function filterAll (){
+    setTData(Transactions);
+    setDataState("AllTransactions");
+  }
 
   const tableHead = [
     {
@@ -64,21 +91,21 @@ export default function TransactionsPage() {
       <section className="mt-8">
         <Heading text="recent transactions" />
         <div className="flex flex-row py-3 text-sm text-[#718EBF] font-medium max-w-[500px]">
-          <div className="flex flex-col gap-y-1 w-full">
+          <div className="flex flex-col gap-y-3 w-full cursor-pointer" onClick={filterAll}>
             <h2>All Transactions</h2>
-            <hr className="" />
+            <hr className={dataState === "AllTransactions" ? "border border-[#718EBF] rounded-full transition ease-in-out delay-100" : ""} />
           </div>
-          <div className="flex flex-col text-center gap-y-1 w-full">
+          <div className="flex flex-col text-center gap-y-3 w-full cursor-pointer" onClick={filterIncome}>
             <h2>Income</h2>
-            <hr className="" />
+            <hr className={dataState === "income" ? "border border-[#718EBF] rounded-full transition ease-in-out delay-100" : ""} />
           </div>
-          <div className="flex flex-col text-center gap-y-1 w-full">
+          <div className="flex flex-col text-center gap-y-3 w-full cursor-pointer" onClick={filterExpense}>
             <h2>Expense</h2>
-            <hr className="" />
+            <hr className={dataState === "expense" ? "border border-[#718EBF] rounded-full transition ease-in-out delay-100" : ""} />
           </div>
         </div>
         <div className="bg-white rounded-lg p-3">
-          <Table tableHead={tableHead} tableBody={Transactions} />
+          <Table tableHead={tableHead} tableBody={tdata} />
         </div>
       </section>
     </main>
