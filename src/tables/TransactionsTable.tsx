@@ -1,6 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Image from "next/image";
 // import { type Dispatch, type SetStateAction } from "react";
-import arrowUp from "@/assets/icons/arrowUp.png";
+import arrowUp from "@/assets/icons/arrow-up.png";
+import arrowDn from "@/assets/icons/arrow-down.png";
+import { Transaction } from "@/utils/TransactionDatas";
+import { useEffect, useState } from "react";
 
 export interface TableProps {
   tableHead: (
@@ -22,12 +26,13 @@ export interface TableProps {
     amount: number;
     mode: string;
   }[];
-
+  dataState: string;
+  currentPage: number;
   // tableBody: object[]
   // setUserId?: Dispatch<SetStateAction<number | undefined>>;
 }
 
-export default function Table({ tableHead, tableBody }: TableProps) {
+export default function Table({ tableHead, tableBody, dataState, currentPage }: TableProps) {
   // function UpdateUserid(e: number){
   //   if(setUserId){
   //     setUserId(e);
@@ -35,6 +40,36 @@ export default function Table({ tableHead, tableBody }: TableProps) {
   //     return null
   //   }
   // }
+
+  const [data, setData] = useState<Transaction[]>(tableBody);
+
+  function filterIncome() {
+    const incomeArray = tableBody.filter((prevState) => {
+      return prevState.mode !== "expense";
+    });
+    setData(incomeArray);
+  }
+
+  function filterExpense() {
+    const expenseArray = tableBody.filter((prevState) => {
+      return prevState.mode !== "income";
+    });
+    setData(expenseArray);
+  }
+
+  useEffect(()=>{
+    if(dataState === "income") {
+      filterIncome()
+    } else if (dataState === "expense"){
+      filterExpense()
+    } else {
+      setData(tableBody);
+    }
+  }, [dataState])
+
+  useEffect(()=>{
+    setData(tableBody);
+  }, [currentPage])
 
   return (
     <table className="w-full border-collapse border-spacing-x-2 border-spacing-y-2 text-left font-semibold text-sm">
@@ -54,7 +89,7 @@ export default function Table({ tableHead, tableBody }: TableProps) {
         </tr>
       </thead>
       <tbody className="rounded-b-lg border-b-[1px] border-gray-700 py-2 capitalize">
-        {tableBody?.map((transaction, index) => {
+        {data.map((transaction, index) => {
           return (
             <tr
               className="border-b-[#E4E4E4] border-b hover:bg-[#f0eeee] transition delay-100 lg:text-[15px]"
@@ -63,10 +98,12 @@ export default function Table({ tableHead, tableBody }: TableProps) {
               <td style={{ fontWeight: "normal" }} className="py-4">
                 <div className="flex flex-row gap-x-2 items-center text-medium">
                   <Image
-                    className="w-[30px] h-auto"
-                    src={arrowUp}
+                    className=""
+                    src={transaction.mode === "expense" ? arrowUp : arrowDn}
                     alt="avatar"
                     priority
+                    height={35}
+                    width={35}
                   />
                   <div className="flex flex-col gap-y-0.5">
                     <p>{transaction.desc}</p>
