@@ -7,6 +7,11 @@ import subscription from "@/assets/icons/subscription.png";
 import user from "@/assets/icons/person.png";
 import service from "@/assets/icons/service.png";
 
+import playstation from "@/assets/icons/playstation.png";
+import applestore from "@/assets/icons/apple-store.png";
+import person1 from "@/assets/icons/person-1.png";
+import person2 from "@/assets/icons/person-2.png";
+
 type AccOverview = {
   title: string;
   amount: string;
@@ -22,6 +27,14 @@ type AccTransaction = {
   status: string;
   amount: number;
   type: string;
+}
+
+type AccInvoices = {
+  icon: StaticImageData;
+  receiver: string;
+  period: string;
+  amount: number;
+  background: string;
 }
 
 const AccountOverview: AccOverview[] = [
@@ -80,4 +93,35 @@ const AccountTransactions:  AccTransaction[] = [
   }
 ]
 
-export { AccountOverview, AccountTransactions };
+const AccountInvoices: AccInvoices[] = [
+  {
+    icon: applestore,
+    receiver: "apple store",
+    period: "5h ago",
+    amount: 450,
+    background: "#DCFAF8"
+  },
+  {
+    icon: person1,
+    receiver: "michael",
+    period: "2 days ago",
+    amount: 160,
+    background: "#FFF5D9"
+  },
+  {
+    icon: playstation,
+    receiver: "playstation",
+    period: "5 days ago",
+    amount: 1085,
+    background: "#E7EDFF"
+  },
+  {
+    icon: person2,
+    receiver: "william",
+    period: "10 days ago",
+    amount: 90,
+    background: "#FFE0EB"
+  },
+]
+
+export { AccountOverview, AccountTransactions, AccountInvoices };

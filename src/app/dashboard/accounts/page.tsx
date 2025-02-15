@@ -1,11 +1,17 @@
 import Image from "next/image";
-import { AccountOverview, AccountTransactions } from "@/utils/AccountsDatas";
+import {
+  AccountInvoices,
+  AccountOverview,
+  AccountTransactions,
+} from "@/utils/AccountsDatas";
 import Heading from "@/components/ui/sectionHeadings";
 import subscription from "@/assets/icons/subscription.png";
 import user from "@/assets/icons/person.png";
 import service from "@/assets/icons/service.png";
 import Cards from "@/components/ui/cards";
+// import applestore from "@/assets/icons/apple-store.png";
 import { Card } from "@/utils/DashboardDatas";
+import DebitCreditOverview from "@/components/graphs/accounts/debitCreditOverview";
 
 export default function AccountsPage() {
   const CardInfo: Card[] = [
@@ -21,9 +27,9 @@ export default function AccountsPage() {
   ];
 
   return (
-    <main className="w-full">
+    <main className="w-full mb-6">
       <section className="flex items-center justify-center px-2 mt-4">
-        <div className="w-fit grid grid-cols-2 gap-4 lg:grid-cols-4 place-items-center px-2 xl:gap-6">
+        <div className="w-fit grid grid-cols-2 gap-4 lg:grid-cols-4 place-items-center px-2 lg:gap-10">
           {AccountOverview.map((_a, _b) => {
             return (
               <div
@@ -49,9 +55,9 @@ export default function AccountsPage() {
       </section>
       <section className="my-6 flex flex-col gap-y-5 items-center lg:flex-row lg:gap-x-3 lg:gap-y-0 lg:items-start">
         {/* last three transactions */}
-        <div className="flex flex-col gap-y-5 w-full lg:w-2/3">
+        <div className="flex flex-col gap-y-5 w-full lg:w-2/3 lg:h-full xl:h-full">
           <Heading text="last transaction" />
-          <div className="bg-white p-5 rounded-lg flex flex-col gap-y-5 lg:gap-y-2 lg:h-[170px] xl:h-[235px] xl:gap-y-4">
+          <div className="bg-white p-5 rounded-lg flex flex-col gap-y-5 lg:gap-y-2 lg:h-full xl:h-full xl:gap-y-4">
             {AccountTransactions.map((_a, _b) => {
               return (
                 <div
@@ -118,10 +124,65 @@ export default function AccountsPage() {
         <div className="flex flex-col gap-y-5 w-full items-center lg:w-1/3">
           <div className="flex flex-row items-center justify-between w-full">
             <Heading text="my card" />
-            <p className="capitalize cursor-pointer hover:underline text-sm lg:text-base text-[#343C6A] font-medium">see all</p>
+            <p className="capitalize cursor-pointer hover:underline text-sm lg:text-base text-[#343C6A] font-medium">
+              see all
+            </p>
           </div>
           <div className="w-full flex justify-center">
-            <Cards cards={CardInfo} className="w-[325px] h-[197px] bg-gradient-to-r justify-between lg:min-h-[170px] xl:min-w-full xl:min-h-[235px]" />
+            <Cards
+              cards={CardInfo}
+              className="w-[325px] h-[197px] bg-gradient-to-r justify-between lg:min-h-[170px] xl:min-w-full xl:min-h-[235px]"
+            />
+          </div>
+        </div>
+      </section>
+      <section className="flex flex-col gap-y-5 lg:flex-row gap-x-3">
+        <div className="flex flex-col gap-y-3 lg:w-2/3">
+          <Heading text="debit & credit overview" />
+          <div className="bg-white rounded-lg p-5 flex flex-col gap-y-3 lg:h-full">
+            <div className="flex flex-row w-full justify-end items-center text-xs lg:justify-between">
+              <p className="hidden font-medium text-[#718EBF] text-xs lg:flex xl:text-base"><span className="text-[#333B69]">$7,560</span> Debited & <span className="text-[#333B69]">$5,420</span> Credited in this Week</p>
+              <div className="flex flex-row items-center gap-x-5 xl:text-base">
+                <div className="flex flex-row gap-x-2 items-center">
+                  <span className="h-[12px] w-[12px] rounded-[4px] bg-[#4C78FF]"></span>
+                  <p className="text-[#718EBF]">Debit</p>
+                </div>
+                <div className="flex flex-row gap-x-2 items-center">
+                  <span className="h-[12px] w-[12px] rounded-[4px] bg-[#FF82AC]"></span>
+                  <p className="text-[#718EBF]">Credit</p>
+                </div>
+              </div>
+            </div>
+            {/* include graph here */}
+            <DebitCreditOverview />
+          </div>
+        </div>
+        <div className="flex flex-col gap-y-3 lg:w-1/3">
+          <Heading text="invoices sent" />
+          <div className="bg-white rounded-xl p-3 flex flex-col gap-y-3">
+            {AccountInvoices.map((_a, _b) => {
+              return (
+                <div key={_b} className="flex flex-row justify-between text-xs items-center p-2 cursor-pointer hover:bg-gray-50 transition delay-100 ease-in-out rounded-lg">
+                  <div className="flex flex-row items-center gap-x-2">
+                    <div className={`h-[45px] w-[45px] flex items-center rounded-lg justify-center p-3 bg-[${_a.background}]`}>
+                      <Image
+                        priority
+                        alt="icon"
+                        src={_a.icon}
+                        className="w-full h-auto"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-y-1">
+                      <h1 className="capitalize text-sm text-[#333B69] font-semibold lg:text-[13px] xl:text-base">
+                        {_a.receiver}
+                      </h1>
+                      <p className="text-[#718EBF] lg:text-xs xl:text-[15px]">{_a.period}</p>
+                    </div>
+                  </div>
+                  <p className="text-[#718EBF] lg:text-[13px] xl:text-base">${_a.amount}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
