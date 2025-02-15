@@ -6,9 +6,10 @@ import mlogo from "@/assets/images/mastercard-logo.png";
 
 export interface CardsProps {
   cards: Card[];
+  className?: string;
 }
 
-export default function Cards({ cards }: CardsProps) {
+export default function Cards({ cards, className }: CardsProps) {
   return (
     <div className="flex flex-row gap-x-4 items-center activity overflow-x-scroll lg:overflow-hidden lg:w-full lg:gap-x-3">
       {cards.map((a, b) => {
@@ -17,7 +18,7 @@ export default function Cards({ cards }: CardsProps) {
             key={b}
             className={
               a.background
-                ? "min-w-[265px] min-h-[170px] rounded-xl text-white bg-gradient-to-t from-blue-700 to-blue-600 p-5 flex flex-col gap-y-2 lg:min-w-[231px] lg:max-h-[170px] xl:min-w-[350px] xl:min-h-[225px] xl:justify-between"
+                ? `min-w-[265px] min-h-[170px] rounded-xl text-white bg-gradient-to-t from-blue-700 to-blue-500 p-5 flex flex-col gap-y-2 lg:min-w-[231px] lg:max-h-[170px] xl:min-w-[350px] xl:min-h-[225px] xl:justify-between ${className && className}`
                 : "min-w-[265px] min-h-[170px] text-black rounded-xl bg-white border border-[#DFEAF2] p-5 flex flex-col gap-y-2 lg:min-w-[231px] lg:max-h-[170px] xl:min-w-[350px] xl:min-h-[225px] xl:justify-between"
             }
           >
