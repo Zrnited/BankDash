@@ -11,7 +11,7 @@ export default function Sidebar() {
   return (
     <aside className={"hidden bg-white w-[220px] border-r border-r-[#E6EFF5] absolute left-0 top-0 h-full py-7 pr-3 md:flex flex-col z-20"}>
       <div className="flex justify-center items-center w-full mt-1">
-        <Image src={logo} alt="logo" priority className="w-[80%] h-auto" />
+        <Image src={logo} alt="logo" priority className="w-[60%] h-auto" />
       </div>
       <ul className="w-full flex flex-col mt-4 gap-y-3">
         {LinkRoutes.map((a, b) => {
@@ -30,8 +30,8 @@ export default function Sidebar() {
                   href={a.linkRoute}
                   className={
                     a.linkRoute === pathname
-                      ? "text-[#2D60FF] text-[17px] capitalize"
-                      : "text-[#B1B1B1] text-[17px] capitalize"
+                      ? "text-[#2D60FF] text-sm capitalize"
+                      : "text-[#B1B1B1] text-sm capitalize"
                   }
                 >
                   {a.linkName}

@@ -1,5 +1,6 @@
 import user from "@/assets/images/user-avatar.png";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CiSearch, CiSettings } from "react-icons/ci";
 import { AiOutlineBell } from "react-icons/ai";
@@ -11,13 +12,32 @@ export interface HeaderProps {
 }
 
 export default function Header({ setSidebar }: HeaderProps) {
+
+  const pathname = usePathname();
+  // console.log(pathname);
+
+  function setHeaderText (){
+    if(pathname === '/dashboard/setting'){
+      return "Setting"
+    }
+    if(pathname === '/dashboard'){
+      return "Overview"
+    }
+    if(pathname === '/dashboard/transactions'){
+      return "Transactions"
+    }
+    if(pathname === '/dashboard/accounts'){
+      return "Accounts"
+    }
+  }
+
   return (
     <header className="p-5 fixed top-0 left-0 right-0 bg-white flex flex-col z-10 gap-y-2 border-b border-b-[#E6EFF5] justify-center items-center">
       <nav className="flex flex-row justify-between items-center container">
         <button onClick={()=>setSidebar(true)} className="md:hidden text-xl">
           <GiHamburgerMenu color="#343C6A" />
         </button>
-        <h1 className="text-[#343C6A] font-semibold text-lg md:text-white lg:text-[#343C6A] lg:ml-[240px] lg:text-2xl">Overview</h1>
+        <h1 className="text-[#343C6A] font-semibold text-lg lg:text-[#343C6A]  md:ml-[240px] lg:text-2xl">{setHeaderText()}</h1>
         <div className="hidden flex-row gap-x-4 items-center sm:flex md:gap-x-7">
           <div className="relative">
             <input

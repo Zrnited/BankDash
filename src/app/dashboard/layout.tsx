@@ -2,11 +2,19 @@
 import Header from "@/components/layout/dashboard/Header";
 import Sidebar from "@/components/layout/dashboard/Sidebar";
 import Sidenav from "@/components/layout/dashboard/Sidenav";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 
   const [sidebar, setSidebar] = useState<boolean>(false);
+
+  useEffect(()=>{
+    if(sidebar){
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [sidebar])
   return (
     <main className="flex relative flex-row w-full h-screen">
       <Sidebar />
