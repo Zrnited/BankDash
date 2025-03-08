@@ -14,9 +14,10 @@ interface LoginForm {
 
 export default function Home() {
   const authUser = {
-    userName: "user123",
-    password: "pass123xJi5"
+    userName: process.env.NEXT_PUBLIC_DEFAULT_USER_NAME,
+    password: process.env.NEXT_PUBLIC_DEFAULT_USER_PASS
   }
+  // console.log(authUser);
   
   const [loginForm, setLoginForm] = useState<LoginForm>({
     username: "",
@@ -41,6 +42,7 @@ export default function Home() {
 
   function handleSubmit (e: any){ 
     e.preventDefault();
+    setDisableBtn(true);
     if(loginForm.username && loginForm.password && loginForm.agreement){
       if(loginForm.username === authUser.userName && loginForm.password === authUser.password){
         setSuccNotify("Signed in successfully");
@@ -48,6 +50,7 @@ export default function Home() {
         setIsUserAuth(true);
       } else {
         setErrNotify("Invalid Username or Password");
+        setDisableBtn(false);
       }
     }
   }
@@ -88,18 +91,18 @@ export default function Home() {
   }, [isUserAuth])
 
   return (
-    <main className="relative flex w-full h-screen justify-center items-center">
+    <main className="relative flex w-full h-screen justify-center p-5">
       {succNotify && (<div className="absolute top-8 bg-green-500 h-[50px] w-full md:w-2/3 flex items-center justify-center text-white lg:max-w-[500px]">
         <p>{succNotify}</p>
       </div>)}
       {errNotify && (<div className="absolute top-8 bg-red-600 h-[50px] w-full md:w-2/3 flex items-center justify-center text-white lg:max-w-[500px]">
         <p>{errNotify}</p>
       </div>)}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-y-4 items-center border px-5 py-8 mx-5 w-full border-[#343C6A] sm:max-w-[400px] lg:px-8 lg:max-w-[500px]">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-y-4 items-center border-2 py-8 px-5 rounded-lg w-full border-[#343C6A] h-fit mt-24 sm:max-w-[400px] lg:px-8 lg:max-w-[500px]">
         <Image src={logo} alt="logo" priority className="w-1/2 h-auto" />
         {/* username */}
         <div className="flex flex-col gap-y-2 w-full mt-5">
-          <label className="text-[#343C6A] font-semibold">Username:</label>
+          <label className="text-[#343C6A] font-semibold">Username*</label>
           <input
             className="h-[45px] w-full border border-[#343C6A] px-3 rounded-md focus:outline-none"
             required
@@ -111,7 +114,7 @@ export default function Home() {
         </div>
         {/* password */}
         <div className="flex flex-col gap-y-2 w-full relative">
-          <label className="text-[#343C6A] font-semibold">Password:</label>
+          <label className="text-[#343C6A] font-semibold">Password*</label>
           <input
             className="h-[45px] w-full border border-[#343C6A] px-3 rounded-md focus:outline-none"
             required
@@ -137,7 +140,7 @@ export default function Home() {
           </label>
         </div>
         {/* --sign in btn-- */}
-        <button disabled={disableBtn} className="h-[45px] bg-[#343C6A] rounded-md w-full text-white transition ease-in-out delay-100 disabled:bg-gray-400 hover:animate-pulse">
+        <button disabled={disableBtn} className="h-[45px] bg-[#343C6A] rounded-md w-full text-white transition ease-in-out delay-100 disabled:bg-gray-400 hover:animate-pulse disabled:hover:animate-none disabled:cursor-not-allowed">
           Sign in
         </button>
       </form>

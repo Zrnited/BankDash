@@ -12,7 +12,7 @@ export async function setCookie() {
   })
 }
 
-export default async function DeleteCookie() {
+export default async function deleteCookie() {
   const cookieStore = await cookies()
   cookieStore.delete('user');
 }

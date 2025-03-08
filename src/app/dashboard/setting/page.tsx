@@ -342,6 +342,7 @@ export default function SettingPage() {
               <label>current password</label>
               <input
                 className="h-[40px] border border-[#DFEAF2] rounded-xl px-5 capitalize text-[#718EBF] focus:outline-none"
+                type="password"
                 defaultValue={user.password}
                 name="currPass"
                 placeholder="Your Current Password"
