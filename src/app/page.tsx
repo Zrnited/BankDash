@@ -91,7 +91,7 @@ export default function Home() {
   }, [isUserAuth])
 
   return (
-    <main className="relative flex w-full h-screen justify-center p-5">
+    <main className="relative flex w-full h-screen justify-center p-5 bg-white">
       {succNotify && (<div className="absolute top-8 bg-green-500 h-[50px] w-full md:w-2/3 flex items-center justify-center text-white lg:max-w-[500px]">
         <p>{succNotify}</p>
       </div>)}

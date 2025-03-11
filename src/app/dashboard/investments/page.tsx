@@ -7,10 +7,11 @@ import MonthlyRevenue from "@/components/graphs/investments/monthlyRevenue";
 import apple_store from "@/assets/icons/appleStore.png";
 import samsung from "@/assets/icons/samsung.png";
 import tesla from "@/assets/icons/tesla.png";
+import TrendingStock from "@/tables/TrendingStock";
 
 export default function InvestmentsPage() {
   return (
-    <main className="w-full pb-[200px]">
+    <main className="w-full">
       <section className="p-5 flex flex-col gap-5 lg:flex-row lg:justify-between lg:px-0">
         {InvstOverview.map((overview, idx) => {
           return (
@@ -53,7 +54,7 @@ export default function InvestmentsPage() {
         </div>
       </section>
       <section className="p-5 flex flex-col gap-5 lg:flex-row lg:w-full lg:px-0">
-        <div className="flex flex-col gap-y-4 lg:w-[65%]">
+        <div className="flex flex-col gap-y-4 lg:w-[60%]">
           <Heading text="my investment" />
           <div className="flex flex-col gap-y-5">
             <div className="bg-white rounded-lg flex items-center justify-between capitalize text-xs flex-row p-3.5 xl:text-[15px]">
@@ -127,8 +128,11 @@ export default function InvestmentsPage() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-y-4 lg:w-[35%]">
+        <div className="flex flex-col gap-y-4 lg:w-[40%]">
           <Heading text="trending stock" />
+          <div className="bg-white py-3 px-5 rounded-lg sm:h-full">
+            <TrendingStock />
+          </div>
         </div>
       </section>
     </main>

@@ -67,7 +67,7 @@ export default function TransactionsPage() {
   ];
 
   return (
-    <main className="w-full">
+    <main className="w-full px-5 lg:px-0">
       <section className="flex flex-col gap-y-5 lg:flex-row lg:gap-x-3">
         {/* My Cards */}
         <div className="flex flex-col gap-y-2 lg:min-w-[480px] xl:min-w-[720px]">

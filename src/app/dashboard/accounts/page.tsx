@@ -27,7 +27,7 @@ export default function AccountsPage() {
   ];
 
   return (
-    <main className="w-full mb-6">
+    <main className="w-full mb-6 px-5 lg:px-0">
       <section className="flex items-center justify-center px-2 mt-4">
         <div className="w-fit grid grid-cols-2 gap-4 lg:grid-cols-4 place-items-center px-2 lg:gap-10">
           {AccountOverview.map((_a, _b) => {

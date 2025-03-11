@@ -21,7 +21,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <main className="w-full">
+    <main className="w-full px-5 lg:px-0">
       {/* Cards and Transactions */}
       <section className="flex flex-col justify-center gap-3 py-4 sm:py-0 lg:pt-5 lg:flex-row lg:justify-start lg:px-1">
         <div className="flex flex-col gap-y-5 lg:min-w-[480px] xl:min-w-[720px]">
